@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRYSM Redesign — Wireframe Sketch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Caveat+Brush&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #F8F5EE;
+      font-family: 'Caveat', cursive;
+      padding: 3rem 2rem;
+      color: #2C2010;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='39' x2='40' y2='39' stroke='%23D4CABC' stroke-width='0.5'/%3E%3C/svg%3E");
+    }
+    .page-label {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 1.6rem;
+      color: #5C4A30;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .page-label::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, #5C4A30 0, #5C4A30 6px, transparent 6px, transparent 12px);
+      opacity: 0.3;
+    }
+    .note {
+      font-size: 1rem;
+      color: #8A7A60;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+    .sketch {
+      max-width: 780px;
+      margin: 0 auto;
+      background: #FDFAF4;
+      border: 2px solid #3C2C10;
+      border-radius: 2px;
+      padding: 0;
+      box-shadow: 4px 6px 0 rgba(60,44,16,0.15);
+      position: relative;
+    }
+    /* Sketch scribble border effect */
+    .sketch::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1.5px solid rgba(60,44,16,0.2);
+      border-radius: 3px;
+      pointer-events: none;
+    }
+
+    /* NAV */
+    .s-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 2px solid #3C2C10;
+      background: #F0EAD8;
+    }
+    .s-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .s-logo-mark {
+      width: 28px; height: 28px;
+      border: 2px solid #3C2C10;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+    }
+    .s-nav-links {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+    .s-nav-link {
+      padding: 0.2rem 0;
+      border-bottom: 1.5px solid #3C2C10;
+    }
+    .s-nav-link.active {
+      border-bottom: 2.5px solid #3C2C10;
+      font-weight: 600;
+    }
+
+    /* HERO BANNER */
+    .s-hero {
+      position: relative;
+      height: 200px;
+      background: #2C2010;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.25rem;
+      overflow: hidden;
+    }
+    .s-hero-car {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.15;
+    }
+    .s-hero-car svg { width: 340px; }
+    .s-hero-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.85rem;
+      color: #F8F5EE;
+    }
+    .s-hero-dots {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+    .s-hero-dot {
+      width: 7px; height: 7px;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      border-radius: 50%;
+    }
+    .s-hero-dot.active { background: rgba(255,255,255,0.8); }
+    .s-hero-title {
+      color: #F8F5EE;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .s-hero-link {
+      font-size: 0.85rem;
+      color: rgba(248,245,238,0.7);
+      text-decoration: underline;
+    }
+    .s-carousel-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: #F8F5EE;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .s-carousel-btn.left { left: 0.75rem; }
+    .s-carousel-btn.right { right: 0.75rem; }
+
+    /* QUICK ACTIONS */
+    .s-actions {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 0;
+      border-bottom: 2px solid #3C2C10;
+    }
+    .s-action {
+      padding: 0.85rem 0.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+      border-right: 1.5px solid #3C2C10;
+      border-top: 2px solid #3C2C10;
+      background: #F8F5EE;
+    }
+    .s-action:last-child { border-right: none; }
+    .s-action-icon { font-size: 1.2rem; margin-bottom: 0.2rem; }
+
+    /* CONTENT GRID */
+    .s-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 0;
+      border-bottom: 2px solid #3C2C10;
+    }
+    .s-main { padding: 1.25rem; border-right: 1.5px dashed #8A7A60; }
+    .s-sidebar { padding: 1.25rem; }
+
+    .s-section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1.5px solid #3C2C10;
+    }
+
+    /* News cards */
+    .s-news-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 0.6rem;
+    }
+    .s-news-card {
+      border: 1.5px solid #3C2C10;
+    }
+    .s-news-thumb {
+      height: 55px;
+      background: repeating-linear-gradient(45deg, #E8E0CC, #E8E0CC 4px, #F0EAD8 4px, #F0EAD8 8px);
+      border-bottom: 1.5px solid #3C2C10;
+    }
+    .s-news-label { padding: 0.3rem 0.4rem; font-size: 0.78rem; }
+
+    /* Sidebar items */
+    .s-sidebar-item {
+      border: 1.5px solid #3C2C10;
+      margin-bottom: 0.75rem;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.88rem;
+    }
+    .s-sidebar-item-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8A7A60;
+      margin-bottom: 0.25rem;
+    }
+    .s-sidebar-thumb {
+      height: 55px;
+      background: repeating-linear-gradient(45deg, #E8E0CC, #E8E0CC 4px, #F0EAD8 4px, #F0EAD8 8px);
+      border: 1px solid #D4CABC;
+      margin-top: 0.4rem;
+    }
+
+    /* Quick links */
+    .s-qlink {
+      font-size: 0.88rem;
+      padding: 0.25rem 0;
+      border-bottom: 1px dashed #D4CABC;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .s-qlink::before { content: '→'; }
+
+    /* Footer */
+    .s-footer {
+      padding: 0.6rem 1.25rem;
+      background: #F0EAD8;
+      border-top: 2px solid #3C2C10;
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+    }
+    .s-footer-link {
+      padding: 0.2rem 0.5rem;
+      border: 1.5px solid #8A7A60;
+      border-radius: 2px;
+    }
+
+    /* ANNOTATIONS */
+    .annotations {
+      max-width: 780px;
+      margin: 2rem auto 0;
+    }
+    .annotation {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+    .annotation-num {
+      min-width: 1.5rem;
+      height: 1.5rem;
+      background: #5C4A30;
+      color: #F8F5EE;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 0.1rem;
+    }
+    .annotation-text { font-size: 1rem; color: #5C4A30; line-height: 1.5; }
+    .annotation-text strong { color: #2C2010; }
+  </style>
+</head>
+<body>
+
+  <p class="page-label">PRYSM Redesign — Wireframe Sketch</p>
+  <p class="note">Discovery-led redesign based on user survey data (51 respondents) · Bentley brand book compliant · Figma prototype</p>
+
+  <div class="sketch">
+
+    <!-- NAV -->
+    <div class="s-nav">
+      <div class="s-logo">
+        <div class="s-logo-mark">B</div>
+        BENTLEY
+      </div>
+      <div class="s-nav-links">
+        <span class="s-nav-link active">Assets</span>
+        <span class="s-nav-link">My Collections</span>
+      </div>
+      <div style="font-size:0.85rem; border:1.5px solid #3C2C10; padding:0.2rem 0.6rem;">Upload Media ↑</div>
+    </div>
+
+    <!-- HERO CAROUSEL -->
+    <div class="s-hero">
+      <div class="s-hero-car">
+        <svg viewBox="0 0 400 160" fill="none" stroke="white" stroke-width="1.5">
+          <ellipse cx="120" cy="130" rx="28" ry="28" />
+          <ellipse cx="280" cy="130" rx="28" ry="28" />
+          <path d="M50 110 Q90 60 160 55 Q220 50 300 60 Q360 65 370 110 L370 125 L50 125 Z" />
+          <path d="M100 55 Q130 25 200 22 Q260 20 290 55" />
+          <line x1="50" y1="110" x2="50" y2="125" />
+        </svg>
+      </div>
+      <div class="s-hero-badge">NEW BENTAYGA SPEED ASSETS →</div>
+      <div class="s-carousel-btn left">‹</div>
+      <div class="s-carousel-btn right">›</div>
+      <div class="s-hero-dots">
+        <div class="s-hero-dot active"></div>
+        <div class="s-hero-dot"></div>
+        <div class="s-hero-dot"></div>
+        <div class="s-hero-dot"></div>
+      </div>
+      <div class="s-hero-title">Welcome to the Bentley Asset Hub</div>
+      <div class="s-hero-link">Explore Exp 15 Assets ↗</div>
+    </div>
+
+    <!-- QUICK ACTIONS — survey-informed priority order -->
+    <div class="s-actions">
+      <div class="s-action">
+        <div class="s-action-icon">🔍</div>
+        Search Assets
+        <div style="font-size:0.65rem;color:#8A7A60;margin-top:0.2rem;">#1 use case</div>
+      </div>
+      <div class="s-action">
+        <div class="s-action-icon">⇄</div>
+        Share Files
+        <div style="font-size:0.65rem;color:#8A7A60;margin-top:0.2rem;">#2 use case</div>
+      </div>
+      <div class="s-action">
+        <div class="s-action-icon">🖼</div>
+        Recently Added
+      </div>
+      <div class="s-action">
+        <div class="s-action-icon">⚙</div>
+        Prism Support
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT + SIDEBAR -->
+    <div class="s-content">
+      <div class="s-main">
+        <div class="s-section-title">Latest News</div>
+        <div class="s-news-grid">
+          <div class="s-news-card">
+            <div class="s-news-thumb"></div>
+            <div class="s-news-label">Prism Functionality</div>
+          </div>
+          <div class="s-news-card">
+            <div class="s-news-thumb"></div>
+            <div class="s-news-label">Bentley New Logo</div>
+          </div>
+          <div class="s-news-card">
+            <div class="s-news-thumb"></div>
+            <div class="s-news-label">Exp 15</div>
+          </div>
+          <div class="s-news-card">
+            <div class="s-news-thumb"></div>
+            <div class="s-news-label">Prism User Survey</div>
+          </div>
+        </div>
+      </div>
+      <div class="s-sidebar">
+        <div class="s-sidebar-item">
+          <div class="s-sidebar-item-label">Share your files</div>
+          <div style="font-size:0.82rem;margin-bottom:0.4rem;">Send assets directly to users</div>
+          <div style="border:1.5px solid #3C2C10;text-align:center;padding:0.3rem;font-size:0.85rem;">[ SHARE ]</div>
+        </div>
+        <div class="s-sidebar-item">
+          <div class="s-sidebar-item-label">Recently Added Media</div>
+          <div class="s-sidebar-thumb"></div>
+        </div>
+        <div class="s-sidebar-item">
+          <div class="s-sidebar-item-label">Quick Links</div>
+          <div class="s-qlink">Bentley Logos</div>
+          <div class="s-qlink">Prism Support Tools</div>
+          <div class="s-qlink">Model Range</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="s-footer">
+      <span class="s-footer-link">Support</span>
+      <span class="s-footer-link">Help</span>
+      <span class="s-footer-link">Cookies</span>
+    </div>
+
+  </div>
+
+  <!-- ANNOTATIONS -->
+  <div class="annotations">
+    <div class="annotation">
+      <div class="annotation-num">1</div>
+      <div class="annotation-text"><strong>Survey-informed navigation hierarchy</strong> — quick action order reflects actual usage data. Search (68%) and file transfer (65%) elevated to primary actions.</div>
+    </div>
+    <div class="annotation">
+      <div class="annotation-num">2</div>
+      <div class="annotation-text"><strong>Hero carousel</strong> — replaces static header with rotating featured content, surfacing new model assets prominently.</div>
+    </div>
+    <div class="annotation">
+      <div class="annotation-num">3</div>
+      <div class="annotation-text"><strong>Bentley brand book compliant</strong> — dark hero, clean typography, and restrained layout aligned to VW Group design standards.</div>
+    </div>
+    <div class="annotation">
+      <div class="annotation-num">4</div>
+      <div class="annotation-text"><strong>Sidebar consolidation</strong> — secondary actions (share files, recently added, quick links) moved to sidebar, keeping the main content area clean.</div>
+    </div>
+  </div>
+
+</body>
+</html>
