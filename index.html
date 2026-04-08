@@ -8,18 +8,22 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --sand: #F5F0E8; --sand-dark: #EDE6D6; --sand-mid: #E0D8C8;
+      --sand: #F5F0E8; --sand-dark: #EDE6D6;
       --warm-white: #FDFAF5; --ink: #2C2416; --ink-mid: #6B5F4A;
       --ink-light: #A89880; --terracotta: #B85C38; --terracotta-light: #F5EDE8;
       --border: #D8CFBE; --dark-section: #2C2416;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Lato', sans-serif; background: var(--warm-white); color: var(--ink); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(253,250,245,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { font-size: 0.82rem; font-weight: 700; color: var(--ink-mid); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
     .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 5rem; gap: 4rem; }
     .hero-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s; }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem,4.5vw,4.2rem); line-height: 1.12; color: var(--ink); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.2s; }
@@ -40,22 +44,26 @@
     .stat-label { font-size: 0.72rem; color: var(--ink-light); margin-top: 0.3rem; font-weight: 300; }
     .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mid); background: var(--sand-dark); padding: 0.3rem 0.75rem; }
+
+    /* DIVIDER */
+    hr.divider { max-width: 1200px; margin: 0 auto; border: none; border-top: 1px solid var(--border); }
+
+    /* WORK SECTION */
     .section-wrap { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
     .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.75rem; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,3vw,2.6rem); line-height: 1.2; margin-bottom: 0.75rem; color: var(--ink); }
     .section-sub { font-size: 1rem; color: var(--ink-mid); font-weight: 300; max-width: 560px; line-height: 1.8; margin-bottom: 3.5rem; }
+
+    /* PROJECT ROWS */
     .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-    .project-row { background: var(--warm-white); display: grid; grid-template-columns: 1fr 2fr; cursor: pointer; transition: background 0.2s; min-height: 220px; }
-    .project-row:nth-child(even) { grid-template-columns: 2fr 1fr; }
-    .project-row:nth-child(even) .project-img { order: 2; }
-    .project-row:nth-child(even) .project-info { order: 1; }
+    .project-row { background: var(--warm-white); display: grid; grid-template-columns: 1fr 2fr; cursor: pointer; transition: background 0.2s; min-height: 240px; }
+    .project-row.reverse { grid-template-columns: 2fr 1fr; }
     .project-row:hover { background: var(--terracotta-light); }
     .project-row:hover .project-arrow { transform: translate(4px,-4px); opacity: 1; }
-    .project-img { background: var(--sand); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-    .project-img img { width: 100%; height: 100%; object-fit: cover; }
-    .project-img-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; padding: 2rem; text-align: center; }
-    .project-img-placeholder .placeholder-icon { font-size: 2rem; opacity: 0.25; }
-    .project-img-placeholder span { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); }
+    .project-img { background: var(--sand); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .project-img .placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0.3; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); }
+    .project-img .placeholder span { font-size: 2rem; }
     .project-info { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; position: relative; }
     .project-arrow { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.1rem; opacity: 0.2; transition: all 0.2s; color: var(--terracotta); }
     .project-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.75rem; display: block; }
@@ -64,6 +72,8 @@
     .project-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
     .project-stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--ink); font-weight: 400; }
     .project-stat span { font-size: 0.72rem; color: var(--ink-light); }
+
+    /* ABOUT */
     .about-wrap { background: var(--sand); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
     .about-text p { font-size: 1rem; font-weight: 300; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.25rem; }
@@ -72,6 +82,8 @@
     .skill-row { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
     .skill-name { color: var(--ink); }
     .skill-level { font-size: 0.72rem; color: var(--ink-light); font-weight: 300; }
+
+    /* CONTACT */
     .contact-wrap { background: var(--dark-section); }
     .contact-inner { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
     .contact-wrap .section-label { color: #B88C70; }
@@ -83,15 +95,14 @@
     .contact-link:hover { background: rgba(255,255,255,0.08); }
     .contact-link-label { font-size: 0.68rem; color: #B88C70; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
     footer { text-align: center; padding: 1.75rem 3rem; background: var(--dark-section); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.78rem; color: #4A3E30; }
-    hr.divider { max-width: 1200px; margin: 0 auto; padding: 0 3rem; border: none; border-top: 1px solid var(--border); }
+
+    /* MODAL */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(44,36,22,0.75); backdrop-filter: blur(6px); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
     .modal-overlay.open { display: flex; }
     .modal { background: var(--warm-white); max-width: 680px; width: 100%; max-height: 88vh; overflow-y: auto; position: relative; }
     .modal-img { width: 100%; height: 260px; background: var(--sand); display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .modal-img img { width: 100%; height: 100%; object-fit: cover; }
-    .modal-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0.35; }
-    .modal-img-placeholder .icon { font-size: 2.5rem; }
-    .modal-img-placeholder span { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); }
+    .modal-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0.35; font-size: 0.7rem; color: var(--ink-mid); }
     .modal-body-wrap { padding: 2.5rem; }
     .modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(44,36,22,0.65); border: none; color: white; font-size: 1rem; cursor: pointer; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
     .modal-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); display: block; margin-bottom: 0.75rem; }
@@ -102,24 +113,30 @@
     .outcome-label { font-size: 0.75rem; color: var(--ink-mid); margin-top: 0.2rem; font-weight: 300; }
     .modal-text p { font-size: 0.9rem; color: var(--ink-mid); line-height: 1.8; font-weight: 300; margin-bottom: 1rem; }
     .modal-text strong { color: var(--ink); font-weight: 700; }
-    .modal-figma { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.25rem; padding: 0.7rem 1.5rem; background: var(--ink); color: var(--warm-white); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
-    .modal-figma:hover { background: var(--terracotta); }
     .modal-figma-soon { font-size: 0.78rem; color: var(--ink-light); margin-top: 1.25rem; font-style: italic; }
+
+    /* ANIMATIONS */
     @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
     .fade-in { opacity:0; transform:translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* MOBILE */
     @media (max-width:900px) {
-      nav { padding:1rem 1.5rem; } .nav-links { display:none; }
-      .hero { grid-template-columns:1fr; padding:6rem 1.5rem 3rem; } .hero-right { display:none; }
+      nav { padding:1rem 1.5rem; }
+      .nav-links { display:none; }
+      .hero { grid-template-columns:1fr; padding:6rem 1.5rem 3rem; }
+      .hero-right { display:none; }
       .section-wrap { padding:4rem 1.5rem; }
-      .project-row, .project-row:nth-child(even) { grid-template-columns:1fr; }
-      .project-row:nth-child(even) .project-img { order:1; } .project-row:nth-child(even) .project-info { order:2; }
+      .project-row, .project-row.reverse { grid-template-columns:1fr; }
       .about-grid { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem; }
-      .contact-grid { grid-template-columns:1fr; gap:2.5rem; } .contact-inner { padding:4rem 1.5rem; }
+      .contact-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .contact-inner { padding:4rem 1.5rem; }
     }
   </style>
 </head>
 <body>
+
+  <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">Zayn Toorawa</a>
     <ul class="nav-links">
@@ -129,6 +146,7 @@
     </ul>
   </nav>
 
+  <!-- HERO -->
   <div class="hero">
     <div class="hero-left">
       <p class="hero-label">Product Designer & Digital Consultant</p>
@@ -149,8 +167,13 @@
           <div class="hero-stat"><div class="stat-num">£19k</div><div class="stat-label">Annual saving delivered</div></div>
         </div>
         <div class="hero-tags">
-          <span class="tag">Figma</span><span class="tag">Power Apps</span><span class="tag">User Research</span>
-          <span class="tag">Agile</span><span class="tag">SharePoint</span><span class="tag">WCAG 2.2</span><span class="tag">Double Diamond</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Power Apps</span>
+          <span class="tag">User Research</span>
+          <span class="tag">Agile</span>
+          <span class="tag">SharePoint</span>
+          <span class="tag">WCAG 2.2</span>
+          <span class="tag">Double Diamond</span>
         </div>
       </div>
     </div>
@@ -158,17 +181,18 @@
 
   <hr class="divider" />
 
+  <!-- WORK -->
   <div class="section-wrap" id="work">
     <p class="section-label fade-in">Selected Work</p>
     <h2 class="section-title fade-in">Products built from first principles.</h2>
     <p class="section-sub fade-in">Every project below was led independently — I identified the problem, designed the solution, and owned it through to launch without a PM or BA.</p>
+
     <div class="projects-list fade-in">
 
-      <!-- PROJECT 1: TimeConnect -->
-      <!-- TO ADD IMAGE: replace the placeholder div below with: <img src="timeconnect-portfolio.png" style="width:100%;height:100%;object-fit:cover;" /> -->
+      <!-- 1. TIMECONNECT -->
       <div class="project-row" onclick="openModal('timeconnect')">
         <div class="project-img">
-          <img src="timeconnect-portfolio.png" style="width:100%;height:100%;object-fit:cover;" alt="TimeConnect" />
+          <img src="timeconnect-portfolio.png" alt="TimeConnect" />
         </div>
         <div class="project-info">
           <span class="project-arrow">↗</span>
@@ -183,9 +207,8 @@
         </div>
       </div>
 
-      <!-- PROJECT 2: WINGS 2 -->
-      <!-- TO ADD IMAGE: replace the placeholder div below with: <img src="wings2-portfolio.png" style="width:100%;height:100%;object-fit:cover;" /> -->
-      <div class="project-row" onclick="openModal('wings2')">
+      <!-- 2. WINGS 2 -->
+      <div class="project-row reverse" onclick="openModal('wings2')">
         <div class="project-info">
           <span class="project-arrow">↗</span>
           <span class="project-tag">Intranet · Figma · SharePoint</span>
@@ -197,15 +220,14 @@
           </div>
         </div>
         <div class="project-img">
-          <img src="wings2-portfolio.png" style="width:100%;height:100%;object-fit:cover;" alt="WINGS 2" />
+          <img src="wings2-portfolio.png" alt="WINGS 2 Intranet" />
         </div>
       </div>
 
-      <!-- PROJECT 3: PRYSM -->
-      <!-- TO ADD IMAGE: replace the placeholder div below with: <img src="prysm-portfolio.png" style="width:100%;height:100%;object-fit:cover;" /> -->
+      <!-- 3. PRYSM -->
       <div class="project-row" onclick="openModal('prysm')">
         <div class="project-img">
-          <img src="prysm-portfolio.png" style="width:100%;height:100%;object-fit:cover;" alt="PRYSM" />
+          <img src="prysm-portfolio.png" alt="PRYSM Image Gallery" />
         </div>
         <div class="project-info">
           <span class="project-arrow">↗</span>
@@ -214,13 +236,13 @@
           <p class="project-desc">Redesigned an internal image gallery platform — improving content structure, visual hierarchy, and navigability for colleagues sourcing Bentley imagery.</p>
           <div class="project-stats">
             <div class="project-stat"><strong>25%</strong><span>Adoption uplift</span></div>
+            <div class="project-stat"><strong>51</strong><span>Survey respondents</span></div>
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 4: Digital Business Cards -->
-      <!-- TO ADD IMAGE: replace the placeholder div below with: <img src="bizcards-portfolio.png" style="width:100%;height:100%;object-fit:cover;" /> -->
-      <div class="project-row" onclick="openModal('bizcard')">
+      <!-- 4. DIGITAL BUSINESS CARDS -->
+      <div class="project-row reverse" onclick="openModal('bizcard')">
         <div class="project-info">
           <span class="project-arrow">↗</span>
           <span class="project-tag">Product Design · Figma</span>
@@ -228,33 +250,35 @@
           <p class="project-desc">Identified a friction point in colleague networking. Designed a branded QR-based card that auto-populated contact details on scan. Adopted company-wide.</p>
           <div class="project-stats">
             <div class="project-stat"><strong>Company-wide</strong><span>Rollout</span></div>
+            <div class="project-stat"><strong>5</strong><span>Card variants</span></div>
           </div>
         </div>
         <div class="project-img">
-          <img src="bizcards-portfolio.png" style="width:100%;height:100%;object-fit:cover;" alt="Digital Business Cards" />
+          <img src="bizcards-portfolio.png" alt="Digital Business Cards" />
         </div>
       </div>
 
-      <!-- PROJECT 5: KPI Dashboard -->
-      <!-- TO ADD IMAGE: replace the placeholder div below with: <img src="tableau-portfolio.png" style="width:100%;height:100%;object-fit:cover;" /> -->
+      <!-- 5. KPI DASHBOARD -->
       <div class="project-row" onclick="openModal('tableau')">
         <div class="project-img">
-          <img src="tableau-portfolio.png" style="width:100%;height:100%;object-fit:cover;" alt="KPI Dashboard" />
+          <img src="tableau-portfolio.png" alt="KPI Dashboard" />
         </div>
         <div class="project-info">
           <span class="project-arrow">↗</span>
           <span class="project-tag">Data Design · Tableau</span>
           <h3 class="project-title">KPI Dashboard</h3>
-          <p class="project-desc">Replaced a manual Excel reporting process with an interactive Tableau dashboard, making complex strategic data accessible to senior leadership.</p>
+          <p class="project-desc">Replaced a manual Excel reporting process with an interactive Tableau dashboard, making complex strategic data accessible to senior leadership across 4 strategic pillars.</p>
           <div class="project-stats">
-            <div class="project-stat"><strong>Excel → Tableau</strong><span>Process replaced</span></div>
+            <div class="project-stat"><strong>Excel → Live</strong><span>Process replaced</span></div>
+            <div class="project-stat"><strong>4</strong><span>Strategic pillars tracked</span></div>
           </div>
         </div>
       </div>
 
-      </div>
+    </div>
   </div>
 
+  <!-- ABOUT -->
   <div class="about-wrap" id="about">
     <div class="about-grid">
       <div class="about-text fade-in">
@@ -282,6 +306,7 @@
     </div>
   </div>
 
+  <!-- CONTACT -->
   <div class="contact-wrap" id="contact">
     <div class="contact-inner">
       <p class="section-label fade-in">Get in touch</p>
@@ -291,11 +316,13 @@
           <p class="contact-desc">Open to new opportunities in product design, UX, and digital consultancy across the North West. If you're building something that needs to work properly for real people — let's talk.</p>
         </div>
         <div class="contact-links fade-in">
-          <a href="/cdn-cgi/l/email-protection#114b70687f657e7e63706670202322517d7867743f727e7c" class="contact-link">
-            <div><div class="contact-link-label">Email</div><span class="__cf_email__" data-cfemail="9ac0fbe3f4eef5f5e8fbedfbaba8a9daf6f3ecffb4f9f5f7">[email&#160;protected]</span></div><span>↗</span>
+          <a href="mailto:Zayntoorawa123@live.com" class="contact-link">
+            <div><div class="contact-link-label">Email</div>Zayntoorawa123@live.com</div>
+            <span>↗</span>
           </a>
           <a href="https://www.linkedin.com/in/zayn-toorawa-a248551b6" target="_blank" class="contact-link">
-            <div><div class="contact-link-label">LinkedIn</div>zayn-toorawa-a248551b6</div><span>↗</span>
+            <div><div class="contact-link-label">LinkedIn</div>zayn-toorawa-a248551b6</div>
+            <span>↗</span>
           </a>
         </div>
       </div>
@@ -304,6 +331,7 @@
 
   <footer>© 2026 Zayn Toorawa — Product Designer & Digital Consultant, Preston.</footer>
 
+  <!-- MODAL -->
   <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
     <div class="modal">
       <button class="modal-close" onclick="closeModalBtn()">✕</button>
@@ -312,74 +340,76 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     const projects = {
       timeconnect: {
-        tag: 'Mobile App · Power Apps', title: 'TimeConnect',
-        img: 'timeconnect-portfolio.png', /* UPDATE: set to null if image not ready */
+        tag: 'Mobile App · Power Apps',
+        title: 'TimeConnect',
+        img: 'timeconnect-portfolio.png',
         outcomes: [
-          {num:'100%', label:'User adoption — became mandatory overseas standard'},
-          {num:'95%', label:'Post-launch satisfaction rating'},
-          {num:'80%', label:'Reduction in clock-in processing time'},
-          {num:'£19k', label:'Estimated annual saving'}
+          { num: '100%', label: 'User adoption — mandatory overseas standard' },
+          { num: '95%',  label: 'Post-launch satisfaction rating' },
+          { num: '80%',  label: 'Reduction in clock-in processing time' },
+          { num: '£19k', label: 'Estimated annual saving' }
         ],
-        body: `<p><strong>The problem:</strong> R&D employees abroad had to take out laptops to clock in — taking 7–10 minutes. When Wi-Fi failed, they'd email managers manually.</p><p><strong>My role:</strong> I identified the problem, evaluated three platforms independently, chose Power Apps, then designed and shipped the entire application solo. No PM, no BA, no brief.</p><p><strong>What I did:</strong> Designed the full UX ensuring alignment with VW Group and Bentley brand standards. Built a stakeholder matrix, value vs effort matrix, and process flows. Ran structured UAT with real users, iterated based on feedback, and monitored live performance post-launch.</p>`,
-        figma: null
+        body: '<p><strong>The problem:</strong> R&D employees abroad had to take out laptops to clock in — taking 7–10 minutes. When Wi-Fi failed, they emailed managers manually. Inconsistent, slow, and unreliable.</p><p><strong>My role:</strong> I identified the problem independently, evaluated three platforms (OutSystems, custom dev, Power Apps), and chose Power Apps based on cost, security, and strategic fit. I then designed, built, and shipped the entire application solo — no PM, no BA, no brief.</p><p><strong>What I did:</strong> Built a stakeholder matrix, value vs effort matrix, and process flows. Designed the full UX in Figma ensuring alignment with VW Group and Bentley brand standards. Ran structured UAT with real users, iterated based on a documented feedback log, and monitored live performance post-launch.</p>'
       },
       wings2: {
-        tag: 'Intranet · Figma · SharePoint', title: 'WINGS 2 Intranet Redesign',
-        img: 'wings2-portfolio.png', /* UPDATE: set to null if image not ready */
+        tag: 'Intranet · Figma · SharePoint',
+        title: 'WINGS 2 Intranet Redesign',
+        img: 'wings2-portfolio.png',
         outcomes: [
-          {num:'25%', label:'Increase in user adoption post-launch'},
-          {num:'70%', label:'Said the site looked significantly better'}
+          { num: '25%', label: 'Increase in user adoption post-launch' },
+          { num: '70%', label: 'Said the site looked significantly better' }
         ],
-        body: `<p><strong>The problem:</strong> Bentley's intranet wasn't working. Navigation was confusing, content was hard to find, engagement was low.</p><p><strong>My role:</strong> I led the end-to-end redesign, using click tracking to challenge stakeholder assumptions and ground decisions in real data.</p><p><strong>What I did:</strong> Interviewed stakeholders across four teams, cross-referenced priorities against click data, designed a new IA and Figma prototype, delivered via SharePoint CMS.</p>`,
-        figma: null
+        body: '<p><strong>The problem:</strong> Bentley\'s internal intranet was confusing, hard to navigate, and had low engagement. Stakeholders had strong opinions about what to prioritise — but no data to support them.</p><p><strong>My role:</strong> I led the end-to-end redesign across four departments — manufacturing, strategy, audit, and comms — using click tracking analytics to challenge assumptions and ground every decision in real user behaviour.</p><p><strong>What I did:</strong> Ran stakeholder interviews, cross-referenced priorities against click data, designed a new information architecture and high-fidelity Figma prototype, and delivered it via SharePoint CMS.</p>'
       },
       prysm: {
-        tag: 'Web Platform · Content Design', title: 'PRYSM Image Gallery',
-        img: 'prysm-portfolio.png', /* UPDATE: set to null if image not ready */
+        tag: 'Web Platform · Content Design',
+        title: 'PRYSM Image Gallery',
+        img: 'prysm-portfolio.png',
         outcomes: [
-          {num:'25%', label:'Uplift in user adoption post-launch'},
-          {num:'51', label:'Survey respondents informed the redesign'}
+          { num: '25%', label: 'Uplift in user adoption post-launch' },
+          { num: '51',  label: 'Survey respondents informed the redesign' }
         ],
-        body: `<p><strong>The problem:</strong> Colleagues needed unreleased Bentley imagery but the platform was hard to navigate and visually inconsistent.</p><p><strong>Research:</strong> I ran a user survey (51 respondents) before touching a single design decision. Searching for images (68%) and transferring files (65%) were the dominant use cases — that shaped the entire redesign priority order.</p><p><strong>What I did:</strong> Redesigned in Figma following Bentley brand book standards — improving content structure, visual hierarchy, and navigability.</p>`,
-        figma: null
+        body: '<p><strong>The problem:</strong> Colleagues needed high-quality unreleased Bentley imagery but the existing platform was hard to navigate and visually inconsistent.</p><p><strong>Research first:</strong> Before touching any design, I ran a user survey with 51 respondents. Searching for images (68%) and file transfer (65%) were the dominant use cases — that data shaped the entire priority order of the redesign.</p><p><strong>What I did:</strong> Redesigned the platform in Figma following Bentley brand book standards — improving content structure, visual hierarchy, and navigability. The redesign showed a clear before/after improvement in both adoption and user satisfaction.</p>'
       },
       bizcard: {
-        tag: 'Product Design · Figma', title: 'Digital Business Cards',
-        img: 'bizcards-portfolio.png', /* UPDATE: set to null if image not ready */
+        tag: 'Product Design · Figma',
+        title: 'Digital Business Cards',
+        img: 'bizcards-portfolio.png',
         outcomes: [
-          {num:'Company-wide', label:'Adopted across Bentley for networking events'},
-          {num:'5', label:'Card variants designed for different roles'}
+          { num: 'Company-wide', label: 'Adopted across Bentley for networking events' },
+          { num: '5', label: 'Card variants designed for different roles' }
         ],
-        body: `<p><strong>The problem:</strong> Colleagues had no consistent branded way to share contact details digitally at networking events.</p><p><strong>My role:</strong> I identified the gap independently and designed a premium branded digital business card with QR code functionality that auto-populated contact details when scanned — adopted company-wide.</p>`,
-        figma: null
+        body: '<p><strong>The problem:</strong> Bentley colleagues attending networking events had no consistent, branded way to share contact details digitally. Paper cards were inconsistent and easily lost.</p><p><strong>My role:</strong> I identified the gap independently and designed a premium branded digital business card with QR code functionality — scanning auto-populated the colleague\'s full contact details directly into the recipient\'s phone.</p><p><strong>What I did:</strong> Designed five card variants in Figma, aligned to Bentley brand standards and backed by customer persona research. The solution was adopted company-wide for all networking events.</p>'
       },
       tableau: {
-        tag: 'Data Design · Tableau', title: 'Strategy KPI Dashboard',
-        img: null, /* UPDATE: add image filename when ready */
+        tag: 'Data Design · Tableau',
+        title: 'Strategy KPI Dashboard',
+        img: 'tableau-portfolio.png',
         outcomes: [
-          {num:'Manual → Live', label:'Excel reporting replaced with interactive dashboard'}
+          { num: 'Manual → Live', label: 'Excel reporting replaced with interactive dashboard' },
+          { num: '4', label: 'Strategic pillars tracked across senior leadership' }
         ],
-        body: `<p><strong>The problem:</strong> The Strategy team produced KPI reports manually in Excel — slow and difficult for leadership to access quickly.</p><p><strong>My role:</strong> I designed and built an interactive Tableau dashboard to replace the manual process entirely, surfacing key metrics clearly for senior stakeholders.</p>`,
-        figma: null
-      }
-        ],
-        body: `<p><strong>The brief:</strong> Bentley needed a definitive brand and content standard aligned to VW Group guidelines.</p><p><strong>My role:</strong> I co-authored the Brand Book — contributing tone of voice guidelines, visual design standards, and content principles used across the entire organisation.</p>`,
-        figma: null
+        body: '<p><strong>The problem:</strong> The Strategy team produced WINGS programme KPI reports manually in Excel — slow, inconsistent, and difficult for senior leadership to access and interpret quickly.</p><p><strong>My role:</strong> I designed and built an interactive Tableau dashboard to replace the manual process entirely, tracking year-to-date delivery status across all four strategic pillars — Operational Excellence, Customer Enthusiasm, Extraordinary People, and Dream Factory.</p><p><strong>What I did:</strong> Mapped each pillar to named senior leaders with individual % completion tracking, RAG status thresholds by quarter, and live data integration — giving leadership a clear, real-time view of programme performance.</p>'
       }
     };
 
     function openModal(key) {
       const p = projects[key];
-      const imgWrap = document.getElementById('modal-img-wrap');
-      imgWrap.innerHTML = p.img
-        ? `<img src="${p.img}" alt="${p.title}" />`
-        : `<div class="modal-img-placeholder"><div class="icon">🖼️</div><span>Screenshots coming soon</span></div>`;
-      const outcomes = p.outcomes.map(o => `<div class="outcome-box"><div class="outcome-num">${o.num}</div><div class="outcome-label">${o.label}</div></div>`).join('');
-      const figmaBtn = p.figma ? `<a href="${p.figma}" target="_blank" class="modal-figma">View in Figma ↗</a>` : `<p class="modal-figma-soon">Figma board link coming soon</p>`;
-      document.getElementById('modal-inner').innerHTML = `<span class="modal-tag">${p.tag}</span><h2>${p.title}</h2><div class="modal-outcomes">${outcomes}</div><div class="modal-text">${p.body}</div>${figmaBtn}`;
+      document.getElementById('modal-img-wrap').innerHTML = p.img
+        ? '<img src="' + p.img + '" alt="' + p.title + '" />'
+        : '<div class="modal-img-placeholder"><span style="font-size:2rem">🖼️</span><span>Screenshots coming soon</span></div>';
+      const outcomes = p.outcomes.map(function(o) {
+        return '<div class="outcome-box"><div class="outcome-num">' + o.num + '</div><div class="outcome-label">' + o.label + '</div></div>';
+      }).join('');
+      document.getElementById('modal-inner').innerHTML =
+        '<span class="modal-tag">' + p.tag + '</span>' +
+        '<h2>' + p.title + '</h2>' +
+        '<div class="modal-outcomes">' + outcomes + '</div>' +
+        '<div class="modal-text">' + p.body + '</div>' +
+        '<p class="modal-figma-soon">Figma board link coming soon</p>';
       document.getElementById('modal-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -390,15 +420,18 @@
         document.body.style.overflow = '';
       }
     }
+
     function closeModalBtn() {
       document.getElementById('modal-overlay').classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(el) {
+        if (el.isIntersecting) el.target.classList.add('visible');
+      });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
   </script>
 </body>
-</html>rsectionOb
+</html>
